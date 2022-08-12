@@ -1,22 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
+import Sketch from "react-p5";
 
 function App() {
+
+let x = 50;
+let y = 50;
+
+  const setup = (p5, canvasParentRef) => {
+		// use parent to render the canvas in this ref
+		// (without that p5 will render the canvas outside of your component)
+		p5.createCanvas(500, 500).parent(canvasParentRef);
+	};
+
+	const draw = (p5) => {
+		p5.background(0);
+		p5.ellipse(x, y, 70, 70);
+		// NOTE: Do not use setState in the draw function or in functions that are executed
+		// in the draw function...
+		// please use normal variables or class properties for these purposes
+		x++;
+	};
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+            4º Período IFRO
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Sketch setup={setup} draw={draw} />
+      
       </header>
     </div>
   );
